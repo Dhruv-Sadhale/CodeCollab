@@ -24,16 +24,16 @@ export class ProblemService {
     );
   }
 
-  addProblem(Problem: Problem): Promise<void> {
-    const ProblemId = this.firestore.createId();
-    return this.ProblemsCollection.doc(ProblemId).set({ ...Problem, ProblemId });
-  }
+  // addProblem(Problem: Problem): Promise<void> {
+  //   const ProblemId = this.firestore.createId();
+  //   return this.ProblemsCollection.doc(ProblemId).set({ ...Problem, problemId });
+  // }
 
-  updateProblem(Problem: Problem): Promise<void> {
-    return this.ProblemsCollection.doc(Problem.ProblemId).update(Problem);
-  }
+  // updateProblem(Problem: Problem): Promise<void> {
+  //   return this.ProblemsCollection.doc(Problem.problemId).update(Problem);
+  // }
 
-  deleteProblem(ProblemId: string): Promise<void> {
-    return this.ProblemsCollection.doc(ProblemId).delete();
-  }
+  // deleteProblem(ProblemId: string): Promise<void> {
+  //   return this.ProblemsCollection.doc(ProblemId).delete();
+  // }
 }

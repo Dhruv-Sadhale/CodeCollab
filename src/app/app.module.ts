@@ -14,8 +14,9 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import {FormsModule} from '@angular/forms';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
-import { CourseListComponent } from './component/problem-list/problem-list.component';
-import { ProblemListComponent } from './models/problem.model';
+import { ProblemListComponent } from './component/problem-list/problem-list.component';
+import { Problem } from './models/problem.model';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { ProblemListComponent } from './models/problem.model';
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    ProblemListComponent,
   ],
   imports: [
     BrowserModule,

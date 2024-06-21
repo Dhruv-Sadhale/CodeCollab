@@ -3,7 +3,7 @@
     production:false,
     firebaseConfig : {
 
-    apiKey: process.env['FIRE_BASE_API_KEY'],
+    apiKey: "AIzaSyCL-Tpsc9WHSbzNJERe0Cd9WJzFjFWXTW4",
   
     authDomain: "olpnew.firebaseapp.com",
   
@@ -18,6 +18,6 @@
     measurementId: "G-ESY6VJ58KX"
   
   },
-  geminiApiKey: process.env['GEMINI_API_KEY']
+  geminiApiKey: "AIzaSyD62JWIJUUh0GGfPg1d7miqdGpOzZNGugc"
 };
   

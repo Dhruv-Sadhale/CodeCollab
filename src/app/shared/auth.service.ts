@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
+import { User } from 'firebase/auth';
+import { Observable } from 'rxjs';
+import { Userlocal } from '../models/userlocal.model';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private fireauth: AngularFireAuth, private router:Router) { }
+  
+  constructor(private fireauth: AngularFireAuth, private router:Router,private firestore: AngularFirestore) { }
+  getUser(): Observable<User | null> {
+    return this.fireauth.authState as Observable<User | null>;
+  }
   login(email : string, password : string) {
     this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
         localStorage.setItem('token','true');
@@ -75,6 +83,12 @@ export class AuthService {
     }, err => {
       alert(err.message);
     })
+  }
+  getUserData(uid: string): Observable<Userlocal | undefined> {
+    return this.firestore.collection('Users').doc<Userlocal>(uid).valueChanges();
+  }
+  updateUserData(uid: string, data: Userlocal) {
+    return this.firestore.collection('Users').doc(uid).set(data, { merge: true });
   }
 
 }
