@@ -43,6 +43,7 @@ export class ProblemListComponent implements OnInit {
     this.authService.getUser().pipe(
       filter(user => !!user), // Ensure user is not null or undefined
       switchMap(user => {
+        console.log(user);
         this.currentUser = user;
         return this.problemService.getProblems();
       })
@@ -85,14 +86,18 @@ export class ProblemListComponent implements OnInit {
       console.log("null")
       return;
     }
-    
-    
+    this.attempt.problem=problem;
+    //this.attempt.problem.problemId=problem.problemId;
+    this.attempt.user = this.currentUser;
+    console.log(this.attempt)
+    console.log(this.attempt.user!.displayName)
+    //console.log(this.attempt.user)
      this.attemptService.getAttemptByUserAndProblemId(this.currentUser!.uid, problem.problemId)
     .subscribe(existingAttempt => {
       if (existingAttempt) {
         // Update attempt
         console.log("bp1");
-        this.attempt.attemptId = existingAttempt.attemptId;
+        //this.attempt.attemptId = existingAttempt.attemptId;
         this.attemptService.updateAttempt(this.attempt).then(() => {
           alert("attempt updated");
           this.resetForm();
@@ -114,9 +119,7 @@ export class ProblemListComponent implements OnInit {
   // deleteAttempt(attempt: Attempt) {
   //   if (this.isDone) {
   //     this.attemptService.deleteAttempt(attempt).then(() => {
-  //       this.isDone = false;
-  //       this.updateUserStatistics(this.isEditing);
-  //       this.resetForm();
+        
   //     });
   //   }
   // }

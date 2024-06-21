@@ -6,6 +6,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ProblemListComponent } from "./component/problem-list/problem-list.component";
+import { AttemptDetailsComponent } from './component/attempt-details/attempt-details.component';
 
 const routes: Routes = [
   {path:"", redirectTo:'login', pathMatch:"full"},
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path:"verify-email", component:VerifyEmailComponent},
   {path:"forgot-password", component:ForgotPasswordComponent},
   {path:"problem-list", component:ProblemListComponent},
-
+  { path: 'attempts/:problemId', component: AttemptDetailsComponent } // Add route for AttemptDetailsComponent
 ];
 
 @NgModule({

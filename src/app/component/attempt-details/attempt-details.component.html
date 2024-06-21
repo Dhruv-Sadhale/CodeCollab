@@ -1,1 +1,37 @@
-<p>attempt-details works!</p>
+<div class="container mt-5">
+    <h2 class="text-center">Attempt Details</h2>
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attempt ID</th>
+              <!-- <th>User ID</th> -->
+              <th>Problem ID</th>
+              <th>Time Taken</th>
+              <th>Memory Used</th>
+              <th>Language</th>
+              <th>Solution</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attempt of attempts">
+              <td>{{ attempt.attemptId }}</td>
+              <!-- <td>{{ attempt.user!.uid }}</td> -->
+              <td>{{ attempt.problem!.problemId }}</td>
+              <td>{{ attempt.tc }}</td>
+              <td>{{ attempt.sc }}</td>
+              <td>{{ attempt.language }}</td>
+              <td>{{ attempt.mySolution }}</td>
+              <td>{{ attempt.notes }}</td>
+            </tr>
+            <tr *ngIf="attempts.length === 0">
+              <td colspan="8" class="text-center">No attempts found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

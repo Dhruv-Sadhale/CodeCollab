@@ -39,5 +39,8 @@ export class AttemptService {
       })
     );
   }
-
+  getAttemptsForProblem(problemId: string): Observable<Attempt[]> {
+    return this.firestore.collection<Attempt>('Attempts', ref => ref.where('problem.problemId', '==', problemId))
+      .valueChanges({ idField: 'attemptId' });
+  }
 }

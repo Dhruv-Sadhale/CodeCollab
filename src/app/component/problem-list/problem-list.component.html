@@ -50,6 +50,7 @@
             <th>Gemini Solution</th>
             <th>View others' solution</th>
             <th>Your Solution</th>
+            <th>Attempts Details</th> 
           </tr>
         </thead>
         <tbody>
@@ -71,6 +72,13 @@
                         (click)="showForm=true; isEditing=true; selectedProblem=problem">Update Solution</button>
               </ng-template>
             </td>
+            <td>
+              
+              <a [routerLink]="['/attempts', selectedProblem?.problemId]" style="text-decoration: none;">
+                Problem List<span class="text-danger"></span>
+              </a>
+            </td>
+            
           </tr>
         </tbody>
       </table>
