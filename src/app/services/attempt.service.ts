@@ -24,4 +24,20 @@ export class AttemptService {
   deleteAttempt(Attempt: Attempt): Promise<void> {
     return this.AttemptCollection.doc(Attempt.attemptId).delete();
   }
+  getAttemptByUserAndProblemId(userId: string, problemId: string): Observable<Attempt | undefined> {
+    return this.firestore.collection<Attempt>('Attempts', ref => 
+      ref.where('user.uid', '==', userId)
+         .where('problem.problemId', '==', problemId)
+    ).snapshotChanges().pipe(
+      map(actions => {
+        const attempt = actions.map(a => {
+          const data = a.payload.doc.data() as Attempt;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+        return attempt.length > 0 ? attempt[0] : undefined;
+      })
+    );
+  }
+
 }

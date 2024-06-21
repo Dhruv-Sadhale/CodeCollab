@@ -2,67 +2,31 @@
   <h2 class="text-center">Problem List</h2>
   <div class="card mb-3">
     <div class="card-body">
-      <form (ngSubmit)="saveAttempt()">
-        <div class="form-group" *ngIf="attempt && attempt.problem">
+      <form *ngIf="showForm" (ngSubmit)="addAttempt(selectedProblem)">
+        <div class="form-group">
           <label for="problemId">Problem Id</label>
-          <input
-            type="text"
-            id="problemId"
-            [(ngModel)]="attempt.problem.problemId"
-            name="problemId"
-            class="form-control"
-            placeholder="Enter problem Id"
-            required
-            
-          />
+          <input type="text" id="problemId" [(ngModel)]="selectedProblem!.problemId"
+                 name="problemId" class="form-control" placeholder="Enter problem Id" required />
         </div>
         <div class="form-group">
           <label for="mySolution">Solution</label>
-          <input
-            type="text"
-            id="mySolution"
-            [(ngModel)]="attempt.mySolution"
-            name="mySolution"
-            class="form-control"
-            placeholder="Enter solution"
-            required
-          />
+          <input type="text" id="mySolution" [(ngModel)]="attempt.mySolution"
+                 name="mySolution" class="form-control" placeholder="Enter solution" required />
         </div>
         <div class="form-group">
           <label for="tc">Time Taken</label>
-          <input
-            type="text"
-            id="tc"
-            [(ngModel)]="attempt.tc"
-            name="tc"
-            class="form-control"
-            placeholder="Enter time taken"
-            required
-          />
+          <input type="text" id="tc" [(ngModel)]="attempt.tc"
+                 name="tc" class="form-control" placeholder="Enter time taken" required />
         </div>
         <div class="form-group">
           <label for="sc">Memory Used</label>
-          <input
-            type="text"
-            id="sc"
-            [(ngModel)]="attempt.sc"
-            name="sc"
-            class="form-control"
-            placeholder="Enter memory used"
-            required
-          />
+          <input type="text" id="sc" [(ngModel)]="attempt.sc"
+                 name="sc" class="form-control" placeholder="Enter memory used" required />
         </div>
         <div class="form-group">
           <label for="language">Programming Language</label>
-          <input
-            type="text"
-            id="language"
-            [(ngModel)]="attempt.language"
-            name="language"
-            class="form-control"
-            placeholder="Enter Programming Language"
-            required
-          />
+          <input type="text" id="language" [(ngModel)]="attempt.language"
+                 name="language" class="form-control" placeholder="Enter Programming Language" required />
         </div>
         <button type="submit" class="btn btn-primary mt-3">
           {{ isEditing ? 'Update' : 'Add' }} Solution
@@ -99,8 +63,13 @@
               <button class="btn btn-info btn-sm" (click)="viewTeamSolution(problem.problemId)">View Friend's Solution</button>
             </td>
             <td>
-              <button class="btn btn-info btn-sm" (click)="addAttempt(problem)">{{ isDone ? 'Update' : 'Add' }}</button>
-              <button class="btn btn-danger btn-sm" *ngIf="isDone" (click)="deleteAttempt(attempt)">Delete</button>
+              <button class="btn btn-info btn-sm"
+                      *ngIf="!isUserSolutionAdded(problem); else updateSolution"
+                      (click)="showForm=true; isEditing=false; selectedProblem=problem">Add Solution</button>
+              <ng-template #updateSolution>
+                <button class="btn btn-info btn-sm"
+                        (click)="showForm=true; isEditing=true; selectedProblem=problem">Update Solution</button>
+              </ng-template>
             </td>
           </tr>
         </tbody>

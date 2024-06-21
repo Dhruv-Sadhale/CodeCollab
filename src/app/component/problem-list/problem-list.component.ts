@@ -15,6 +15,7 @@ import { filter, switchMap } from 'rxjs/operators';
 })
 export class ProblemListComponent implements OnInit {
   problems: Problem[] = [];
+  showForm: boolean = false;
   isEditing: boolean = false;
   isDone: boolean = false;
   attempt: Attempt = {
@@ -26,13 +27,16 @@ export class ProblemListComponent implements OnInit {
     language: '',
     mySolution: '',
     notes: ''
+
   };
   currentUser: User | null = null;
+  selectedProblem: Problem | null = null; 
 
   constructor(
     private problemService: ProblemService,
     private authService: AuthService,
-    private attemptService: AttemptService
+    private attemptService: AttemptService,
+    
   ) {}
 
   ngOnInit(): void {
@@ -48,54 +52,74 @@ export class ProblemListComponent implements OnInit {
   }
 
   saveAttempt() {
+    console.log('Form submitted1')
     if (this.currentUser && this.attempt) {
       this.attempt.user = this.currentUser;
       
       if (this.isEditing) {
         this.attemptService.updateAttempt(this.attempt).then(() => {
-          this.updateUserStatistics(this.isEditing);
+          
           this.resetForm();
         });
       } else {
         this.attemptService.addAttempt(this.attempt).then(() => {
-          this.updateUserStatistics(this.isEditing);
+          this.addUserStatistics();
           this.resetForm();
         });
       }
     } else {
       console.error('User not authenticated or attempt is null');
     }
-    console.log('Form submitted'); // Check if this log appears in the console
+    console.log('Form submitted2'); // Check if this log appears in the console
   }
 
-  editAttempt(attempt: Attempt) {
-    this.attempt = { ...attempt };
-    this.isEditing = true;
-  }
+  // editAttempt(attempt: Attempt) {
+  //   this.attempt = { ...attempt };
+  //   this.isEditing = true;
+  // }
 
-  addAttempt(problem: Problem) {
-    this.attempt = {
-      attemptId: '',
-      user: this.currentUser!,
-      problem: problem,
-      tc: 0,
-      sc: 0,
-      language: '',
-      mySolution: '',
-      notes: ''
-    };
-    this.isEditing = false;
-  }
+   addAttempt(problem: Problem |null ) {
+    console.log('Form submitted1'); // Check if this log appears in the console
 
-  deleteAttempt(attempt: Attempt) {
-    if (this.isDone) {
-      this.attemptService.deleteAttempt(attempt).then(() => {
-        this.isDone = false;
-        this.updateUserStatistics(this.isEditing);
-        this.resetForm();
-      });
+    if(problem==null){
+      console.log("null")
+      return;
     }
+    
+    
+     this.attemptService.getAttemptByUserAndProblemId(this.currentUser!.uid, problem.problemId)
+    .subscribe(existingAttempt => {
+      if (existingAttempt) {
+        // Update attempt
+        console.log("bp1");
+        this.attempt.attemptId = existingAttempt.attemptId;
+        this.attemptService.updateAttempt(this.attempt).then(() => {
+          alert("attempt updated");
+          this.resetForm();
+        });
+      } else {
+        // Add new attempt
+        console.log("bp2");
+        this.attemptService.addAttempt(this.attempt).then(() => {
+          alert("attempt added");
+          this.resetForm();
+        });
+        
+      }
+    });
+    console.log('Form submitted2'); // Check if this log appears in the console
+
   }
+
+  // deleteAttempt(attempt: Attempt) {
+  //   if (this.isDone) {
+  //     this.attemptService.deleteAttempt(attempt).then(() => {
+  //       this.isDone = false;
+  //       this.updateUserStatistics(this.isEditing);
+  //       this.resetForm();
+  //     });
+  //   }
+  // }
 
   viewTeamSolution(problemId: string) {
     // Implement this function as needed
@@ -113,14 +137,18 @@ export class ProblemListComponent implements OnInit {
       notes: ''
     };
     this.isEditing = false;
+    this.showForm = false;
+    this.selectedProblem = null; // Reset sel 
+  
   }
 
-  private updateUserStatistics(isEditing: boolean) {
+  
+  private addUserStatistics() {
     if (this.currentUser && this.attempt && this.attempt.problem) {
       this.authService.getUserData(this.currentUser.uid).subscribe(userData => {
         if (userData) {
           const userStats: Userlocal = userData;
-          if(isEditing==false){
+         
           userStats.total += 1;
           if(this.attempt.problem!=null){
             const difficulty = this.attempt.problem.difficultyLevel;
@@ -130,7 +158,7 @@ export class ProblemListComponent implements OnInit {
               if (difficulty === 'hard') userStats.hard += 1;
             }
           }
-        }
+        
           this.authService.updateUserData(this.currentUser!.uid, userStats).then(() => {
             console.log('User statistics updated');
           });
@@ -138,4 +166,13 @@ export class ProblemListComponent implements OnInit {
       });
     }
   }
+  isUserSolutionAdded(problem: Problem): boolean {
+    if (!this.currentUser) {
+      return false;
+    }
+    this.selectedProblem=problem;
+    return this.problems.some(p => p.problemId === problem.problemId) &&
+           this.attemptService.getAttemptByUserAndProblemId(this.currentUser.uid, problem.problemId) !== undefined;
+  }
+  
 }

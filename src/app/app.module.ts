@@ -16,6 +16,7 @@ import { ForgotPasswordComponent } from './component/forgot-password/forgot-pass
 import { VerifyEmailComponent } from './component/verify-email/verify-email.component';
 import { ProblemListComponent } from './component/problem-list/problem-list.component';
 import { Problem } from './models/problem.model';
+import { AttemptDetailsComponent } from './component/attempt-details/attempt-details.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { Problem } from './models/problem.model';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     ProblemListComponent,
+    AttemptDetailsComponent,
   ],
   imports: [
     BrowserModule,

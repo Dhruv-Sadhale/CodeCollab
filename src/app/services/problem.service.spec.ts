@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ProblemService } from './problem.service';
+import { beforeEach, describe, it } from 'node:test';
 
-describe('CourseService', () => {
+describe('ProblemService', () => {
   let service: ProblemService;
 
   beforeEach(() => {
@@ -14,3 +15,7 @@ describe('CourseService', () => {
     expect(service).toBeTruthy();
   });
 });
+function expect(service: ProblemService) {
+  throw new Error('Function not implemented.');
+}
+
