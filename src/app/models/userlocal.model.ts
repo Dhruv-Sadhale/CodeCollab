@@ -1,8 +1,9 @@
 import { User } from 'firebase/auth'; // Importing the Firebase User type
 
 export interface Userlocal {
-    user: User; 
-    name: string;  
+    uid: string;
+    user: User | null; 
+    displayName: string;  
     email: string;
     easy: number;
     medium: number;

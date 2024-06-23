@@ -10,7 +10,7 @@ export class LoginComponent {
  email:string='';
  password: string='';
  constructor(private auth :AuthService){}
- login(){
+ async login(){
   console.log("hello");
   if(this.email==''){
     alert("Please enter email");
@@ -20,7 +20,7 @@ export class LoginComponent {
     alert("Please enter password");
     return;
   }
-  this.auth.login(this.email,this.password);
+  await this.auth.login(this.email,this.password);
   this.email='';
   this.password='';
  }

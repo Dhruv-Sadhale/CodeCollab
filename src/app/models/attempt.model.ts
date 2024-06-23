@@ -1,11 +1,11 @@
 // attempt.model.ts
 
 import { Problem } from './problem.model';
-import { User } from 'firebase/auth';
-
+import { Userlocal } from './userlocal.model';
 export interface Attempt {
   attemptId: string;
-  user: User | null; // Allow for null values
+  email: string |undefined;
+  user: Userlocal| null; // Allow for null values
   problem: Problem | null; // Adjust other properties as needed
   tc: number;
   sc: number;
