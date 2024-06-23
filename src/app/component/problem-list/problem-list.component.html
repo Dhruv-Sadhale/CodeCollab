@@ -1,3 +1,6 @@
+<div>
+  <app-chart></app-chart>
+</div>
 <div class="container mt-5">
   <h2 class="text-center">Problem List</h2>
   <div class="card mb-3">
@@ -44,11 +47,11 @@
         <thead>
           <tr>
             <th>Problem Id</th>
-            <th>Link</th>
+            <th>Problem</th>
             <th>Level</th>
             <th>Topic tag</th>
-            <th>Gemini Solution</th>
-            <th>View others' solution</th>
+            <!-- <th>Gemini Solution</th> -->
+            <!-- <th>View others' solution</th> -->
             <th>Your Solution</th>
             <th>Attempts Details</th> 
           </tr>
@@ -56,13 +59,16 @@
         <tbody>
           <tr *ngFor="let problem of problems">
             <td>{{ problem.problemId }}</td>
-            <td><a [href]="problem.link" target="_blank">{{ problem.link }}</a></td>
+            <!-- <td><a [href]="problem.link" target="_blank">{{ problem.link }}</a></td> -->
+            <td>
+              <a [href]="problem.link" target="_blank"  class="no-underline">{{ extractProblemId(problem.link) }}</a>
+            </td>
             <td>{{ problem.difficultyLevel }}</td>
             <td>{{ problem.topicTag }}</td>
-            <td>{{ problem.solution }}</td>
-            <td>
+            <!-- <td>{{ problem.solution }}</td> -->
+            <!-- <td>
               <button class="btn btn-info btn-sm" (click)="viewTeamSolution(problem.problemId)">View Friend's Solution</button>
-            </td>
+            </td> -->
             <td>
               <button class="btn btn-info btn-sm"
                       *ngIf="!isUserSolutionAdded(problem); else updateSolution"
@@ -74,9 +80,10 @@
             </td>
             <td>
               
-              <a [routerLink]="['/attempts', selectedProblem?.problemId]" style="text-decoration: none;">
-                Problem List<span class="text-danger"></span>
+              <button class="btn btn-info btn-sm"> <a [routerLink]="['/attempts', selectedProblem?.problemId]" style="text-decoration: none;">
+                View Attempt<span class="text-danger"></span>
               </a>
+            </button>
             </td>
             
           </tr>

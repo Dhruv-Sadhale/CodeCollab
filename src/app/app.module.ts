@@ -17,8 +17,9 @@ import { VerifyEmailComponent } from './component/verify-email/verify-email.comp
 import { ProblemListComponent } from './component/problem-list/problem-list.component';
 import { Problem } from './models/problem.model';
 import { AttemptDetailsComponent } from './component/attempt-details/attempt-details.component';
-
-@NgModule({
+import { ChartComponent } from './component/chart/chart.component';
+//import { UserStatsComponent } from './user-stats/user-stats.component';
+@NgModule({ 
   declarations: [
     AppComponent,
     LoginComponent,
@@ -28,12 +29,15 @@ import { AttemptDetailsComponent } from './component/attempt-details/attempt-det
     VerifyEmailComponent,
     ProblemListComponent,
     AttemptDetailsComponent,
+    ChartComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule
+    
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"olpnew","appId":"1:1068847586573:web:82fc2ad62bb8cc08172444","storageBucket":"olpnew.appspot.com","apiKey":"AIzaSyCL-Tpsc9WHSbzNJERe0Cd9WJzFjFWXTW4","authDomain":"olpnew.firebaseapp.com","messagingSenderId":"1068847586573","measurementId":"G-ESY6VJ58KX"})),

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Userlocal } from '../models/userlocal.model';
+import { Observable, firstValueFrom, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,18 @@ export class UserService {
       console.error(`User with EMAIL ${email} does not exist.`);
       return null;
     }
+  }
+  getAllUsers(): Observable<Userlocal[]> {
+    return this.firestore.collection('Users').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Userlocal;
+        data.uid = a.payload.doc.id;
+        return data;
+      }))
+    );
+  }
+
+  async getAllUsersAsPromise(): Promise<Userlocal[]> {
+    return firstValueFrom(this.getAllUsers());
   }
 }

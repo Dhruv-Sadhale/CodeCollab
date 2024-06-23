@@ -64,7 +64,12 @@ export class ProblemListComponent implements OnInit {
       this.problems = problems;
     });
   }
-
+  extractProblemId(url: string): string {
+    // Extracts the part of the URL after 'https://leetcode.com/problems/' and before '/description/'
+    const regex = /https:\/\/leetcode.com\/problems\/([^\/]+)\/description\//;
+    const match = url.match(regex);
+    return match ? match[1] : url;
+  }
 
   // saveAttempt() {
   //   console.log('Form submitted1')

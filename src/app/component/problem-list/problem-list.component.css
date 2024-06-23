@@ -1,0 +1,9 @@
+.no-underline {
+    text-decoration: none;
+     /* This makes the link color inherit from the surrounding text */
+  }
+  
+  .no-underline:hover {
+    text-decoration: underline; /* Optional: underline on hover */
+  }
+  

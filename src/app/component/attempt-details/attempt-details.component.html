@@ -1,13 +1,13 @@
 <div class="container mt-5">
-    <h2 class="text-center">Attempt Details</h2>
+    <h2 class="text-center">Attempt Details for Problem {{problemId}}</h2>
     <div class="card">
       <div class="card-body">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Attempt ID</th>
-              <th>User ID</th>
-              <th>Problem ID</th>
+              <!-- <th>User Email</th> -->
+              <th>User</th>
+              <!-- <th>Problem ID</th> -->
               <th>Time Taken</th>
               <th>Memory Used</th>
               <th>Language</th>
@@ -17,9 +17,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let attempt of attempts">
-              <td>{{ attempt.attemptId }}</td>
+              <!-- <td>{{ attempt.user?.displayName }}</td> -->
               <td>{{ attempt.email! }}</td>
-              <td>{{ attempt.problem!.problemId }}</td>
+              <!-- <td>{{ attempt.problem!.problemId }}</td> -->
               <td>{{ attempt.tc }}</td>
               <td>{{ attempt.sc }}</td>
               <td>{{ attempt.language }}</td>
