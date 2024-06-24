@@ -53,7 +53,7 @@ export class ChartComponent implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Total Questions',
+          label: 'Total Questions',
           data: dataTotal,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
@@ -74,7 +74,7 @@ export class ChartComponent implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Easy Questions',
+          label: 'No. of Easy Questions',
           data: dataEasy,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
@@ -88,7 +88,7 @@ export class ChartComponent implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Medium Questions',
+          label: 'No. of Medium Questions',
           data: dataMedium,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
@@ -102,7 +102,7 @@ export class ChartComponent implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Hard Questions',
+          label: 'No. of Hard Questions',
           data: dataHard,
           backgroundColor: backgroundColors,
           borderColor: borderColors,

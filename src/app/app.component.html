@@ -1,4 +1,19 @@
-<div>
+<header class="navbar">
+    <a href="/" class="logo" >CodeCollab</a>
+    <nav class="menu">
+        <!-- <a href="#home">Home</a> -->
+        <a href="#about">About</a>
+        <!-- <a href="login">Login</a>
+        <a href="register">Sign up</a> -->
+        <ng-container *ngIf="!authService.isLoggedIn; else loggedIn">
+            <a (click)="onLogin()" href="#">Login</a>
+        </ng-container>
+        <ng-template #loggedIn>
+            <a (click)="onLogout()" href="#">Logout</a>
+        </ng-template>
+    </nav>
+</header>
+<div class="content">
 
     <router-outlet></router-outlet>
 </div>

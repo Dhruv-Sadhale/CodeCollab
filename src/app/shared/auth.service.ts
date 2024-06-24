@@ -3,22 +3,28 @@ import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { Userlocal } from '../models/userlocal.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserService } from '../services/user.service';
 import { collection } from 'firebase/firestore';
+import { CookieService } from 'ngx-cookie-service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  
-  constructor(private fireauth: AngularFireAuth, private router:Router,private firestore: AngularFirestore, private userService: UserService) { }
+  isLoggedIn: boolean = false;
+  constructor(private fireauth: AngularFireAuth, private router:Router,private firestore: AngularFirestore, private userService: UserService,private cookieService: CookieService) {
+    const token = this.cookieService.get('token') || localStorage.getItem('token');
+    if (token) {
+      this.isLoggedIn = true;
+    }
+   }
   getUser(): Observable<User | null> {
     return this.fireauth.authState as Observable<User | null>;
   }
   async login(email: string, password: string) {
-    console.log("hallc");
     try {
       const userCredential = await this.fireauth.signInWithEmailAndPassword(email, password);
       console.log(userCredential.user);
@@ -105,7 +111,15 @@ export class AuthService {
   async googleSignIn() {
     try {
       const res = await this.fireauth.signInWithPopup(new GoogleAuthProvider());
-      
+      const email = res.user?.email;
+      console.log(email);
+      // Check if user email is in Firestore collection
+      const userDoc = await firstValueFrom(this.firestore.collection('ConfirmUsers').doc(email!).get());
+      if (!userDoc.exists) {
+        alert('Your email is not approved for access.');
+        await this.fireauth.signOut();
+        return;
+      }
       // Check if user document exists in Firestore
       const userExists = await this.userService.userExists(res.user!.email);
       if (!userExists) {
@@ -114,14 +128,28 @@ export class AuthService {
         console.log("done");
       }
       console.log("done2")
-      this.router.navigate(['/dashboard']);
+      localStorage.setItem('token', res.user?.uid || '');
+      this.cookieService.set('token', res.user?.uid || '', { expires: 365, sameSite: 'Lax' });
+      this.isLoggedIn = true;
+      this.router.navigate(['/problem-list']);
       localStorage.setItem('token', JSON.stringify(res.user?.uid));
     } catch (error: any) {
       console.error('Google sign-in error:', error.message || error);
       alert(error.message || 'Google sign-in failed');
     }
   }
-  
+  async signOut() {
+    try {
+      await this.fireauth.signOut();
+      this.cookieService.delete('token');
+      localStorage.removeItem('token');
+      this.isLoggedIn = false;
+      this.router.navigate(['/']);
+    } catch (error: any) {
+      console.error('Sign-out error:', error.message || error);
+      alert(error.message || 'Sign-out failed');
+    }
+  }
   getUserData(email: string): Observable<Userlocal | undefined> {
     return this.firestore.collection('Users').doc<Userlocal>(email).valueChanges();
   }

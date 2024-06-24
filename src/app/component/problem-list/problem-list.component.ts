@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { ProblemService } from '../../services/problem.service';
 import { Problem } from '../../models/problem.model';
 import { AuthService } from '../../shared/auth.service';
@@ -40,7 +40,8 @@ export class ProblemListComponent implements OnInit {
     private problemService: ProblemService,
     private authService: AuthService,
     private attemptService: AttemptService,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +63,7 @@ export class ProblemListComponent implements OnInit {
       })
     ).subscribe(problems => {
       this.problems = problems;
+      this.cdr.detectChanges();
     });
   }
   extractProblemId(url: string): string {
@@ -169,10 +171,30 @@ export class ProblemListComponent implements OnInit {
     this.isEditing = false;
     this.showForm = false;
     this.selectedProblem = null; 
-  
+    this.cdr.detectChanges(); // Trigger change detection after resetting the form
+  }
+  onAddSolution(problem: Problem) {
+    this.selectedProblem = problem;
+    this.attempt = {
+      attemptId: '',
+      email: this.currentLocalUser!.email,
+      user: this.currentLocalUser,
+      problem: problem,
+      tc: 0,
+      sc: 0,
+      language: '',
+      mySolution: '',
+      notes: ''
+    };
+    this.showForm = true;
+    this.isEditing = false;
+    this.cdr.detectChanges(); // Trigger change detection after resetting the form
   }
 
-  
+  rememberProblem(problem:Problem){
+    this.selectedProblem=problem;
+    this.showForm=false;
+  }
  
 
 private async addUserStatistics() {
@@ -211,9 +233,24 @@ private async addUserStatistics() {
       return false;
     }
     if(this.currentUser.email==null){return false;}
-    this.selectedProblem=problem;
+   // this.selectedProblem=problem;
     return this.problems!.some(p => p.problemId === problem.problemId) &&
            this.attemptService.getAttemptByUserAndProblemId(this.currentUser.email, problem.problemId) !== undefined;
   }
-  
+  onUpdateSolution(problem: Problem) {
+    this.selectedProblem = problem;
+    this.attempt = {
+      attemptId: '',
+      email: this.currentLocalUser!.email,
+      user: this.currentLocalUser,
+      problem: problem,
+      tc: 0,
+      sc: 0,
+      language: '',
+      mySolution: '',
+      notes: ''
+    };
+    this.showForm = true;
+    this.isEditing = true;
+  }
 }

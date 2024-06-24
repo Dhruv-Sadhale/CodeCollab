@@ -8,8 +8,8 @@
               <!-- <th>User Email</th> -->
               <th>User</th>
               <!-- <th>Problem ID</th> -->
-              <th>Time Taken</th>
-              <th>Memory Used</th>
+              <th>Time Taken(in ms)</th>
+              <th>Memory Used(in MB)</th>
               <th>Language</th>
               <th>Solution</th>
               <th>Notes</th>
@@ -23,7 +23,7 @@
               <td>{{ attempt.tc }}</td>
               <td>{{ attempt.sc }}</td>
               <td>{{ attempt.language }}</td>
-              <td>{{ attempt.mySolution }}</td>
+              <td><pre style="white-space: pre-wrap;">{{ attempt.mySolution }}</pre></td>
               <td>{{ attempt.notes }}</td>
             </tr>
             <tr *ngIf="attempts.length === 0">

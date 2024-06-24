@@ -18,6 +18,8 @@ import { ProblemListComponent } from './component/problem-list/problem-list.comp
 import { Problem } from './models/problem.model';
 import { AttemptDetailsComponent } from './component/attempt-details/attempt-details.component';
 import { ChartComponent } from './component/chart/chart.component';
+import { HomeComponent } from './component/home/home.component';
+import { AutoExpandDirective } from './auto-expand.directive';
 //import { UserStatsComponent } from './user-stats/user-stats.component';
 @NgModule({ 
   declarations: [
@@ -30,6 +32,8 @@ import { ChartComponent } from './component/chart/chart.component';
     ProblemListComponent,
     AttemptDetailsComponent,
     ChartComponent,
+    HomeComponent,
+    AutoExpandDirective,
    
   ],
   imports: [

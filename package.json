@@ -23,6 +23,7 @@
     "chart.js": "^4.4.3",
     "firebase": "^10.12.2",
     "ng2-charts": "^6.0.1",
+    "ngx-cookie-service": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -33,7 +34,7 @@
     "@angular/cli": "^18.0.4",
     "@angular/compiler-cli": "^18.0.0",
     "@types/jasmine": "~5.1.0",
-    "@types/node": "^20.14.7",
+    "@types/node": "^20.14.8",
     "dotenv": "^16.4.5",
     "dotenv-webpack": "^8.1.0",
     "jasmine-core": "~5.1.0",

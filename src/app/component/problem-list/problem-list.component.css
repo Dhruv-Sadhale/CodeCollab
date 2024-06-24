@@ -6,4 +6,12 @@
   .no-underline:hover {
     text-decoration: underline; /* Optional: underline on hover */
   }
+  .auto-expand {
+    resize: none; /* Prevent manual resizing by users */
+    overflow-y: hidden; /* Hide scrollbar initially */
+    min-height: 50px; /* Ensure it starts with at least 50px height */
+    transition: height 0.2s; /* Smooth transition for height change */
+    padding: 10px; /* Padding for better visual appearance */
+    height: auto; /* Let the browser calculate the height based on content */
+  }
   

@@ -1,1 +1,573 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    background-color: #e4f8ef;
+    color: #333;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    transition: background 0.3s;
+}
+
+.navbar .menu a:hover {
+    background-color: #555;
+}
+
+.hero {
+    height: 100vh;
+    background: url('./static/images/homepage.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left;
+    color: rgb(49, 192, 137);
+    padding-top: 60px; /* Space for the fixed navbar */
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-left: 20px;
+}
+
+.cta-button:hover {
+    background-color: #555;
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about, .services, .contact {
+    background-color: #71ec9b;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.service-item {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.content {
+    padding-top: 70px; /* Add padding equal to the height of the navbar */
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Additional Styles for Login, Problem List, Dashboard, and Attempt Details Pages */
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.text-dark {
+    color: #333 !important; /* Override text color to dark */
+}
+
+.text-muted {
+    color: #555 !important; /* Override text color to muted */
+}
+
+.text-center {
+    text-align: center !important; /* Override text alignment to center */
+}
+
+.text-danger {
+    color: red !important; /* Override text color to red */
+}
+
+.no-underline {
+    text-decoration: none !important; /* Remove underline from links */
+}
+
+.mt-5 {
+    margin-top: 5rem !important; /* Override margin top */
+}
+
+.col {
+    flex: 1; /* Make columns flexible */
+}
+
+.col-4 {
+    flex: 4; /* Adjust width of columns */
+}
+
+.row {
+    display: flex; /* Use flexbox for rows */
+    justify-content: space-between; /* Space between items in row */
+    align-items: center; /* Center align items in row */
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Adjust form group margins */
+}
+
+.btn-info {
+    background-color: #37d189 !important; /* Override button background color to match theme */
+    color: white !important; /* Override button text color to white */
+    border-color: #37d189 !important; /* Override button border color */
+}
+
+.btn-info:hover {
+    background-color: #2eab7a !important; /* Override button hover background color */
+    border-color: #2eab7a !important; /* Override button hover border color */
+}
+
+.btn-warning {
+    background-color: #f0ad4e !important; /* Override warning button background color */
+    border-color: #eea236 !important; /* Override warning button border color */
+}
+
+.btn-warning:hover {
+    background-color: #ec971f !important; /* Override warning button hover background color */
+    border-color: #d58512 !important; /* Override warning button hover border color */
+}
+
+.shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect to elements */
+}
+
+.text-muted {
+    color: #555; /* Set muted text color */
+}
+
+.text-dark {
+    color: #333; /* Set dark text color */
+}
+
+.no-underline {
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Set link color */
+}
+
+.container-fluid {
+    width: 100%; /* Set container fluid width */
+    padding-right: 15px; /* Override padding right */
+    padding-left: 15px; /* Override padding left */
+    margin-right: auto; /* Set margin right auto */
+    margin-left: auto; /* Set margin left auto */
+}
+
+.card {
+    position: relative; /* Set card position relative */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Set card flex direction to column */
+    min-width: 0; /* Set minimum width to 0 */
+    word-wrap: break-word; /* Break word wrap */
+    background-color: #fff; /* Set card background color */
+    background-clip: border-box; /* Set background clip to border box */
+    border: 1px solid rgba(0, 0, 0, 0.125); /* Set card border */
+    border-radius: 0.25rem; /* Set card border radius */
+}
+
+.shadow {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); /* Set shadow box */
+}
+
+.text-center {
+    text-align: center; /* Set text align to center */
+}
+
+.btn-warning {
+    color: #212529; /* Set button warning color */
+    background-color: #ffc107; /* Set button warning background color */
+    border-color: #ffc107; /* Set button warning border color */
+}
+
+.btn-warning:hover {
+    color: #212529; /* Set button warning hover color */
+    background-color: #e0a800; /* Set button warning hover background color */
+    border-color: #d39e00; /* Set button warning hover border color */
+}
+
+.mt-5,
+.my-5 {
+    margin-top: 3rem !important; /* Set margin top */
+}
+
+.shadow {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; /* Set shadow box */
+}
+
+.text-dark {
+    color: #212529 !important; /* Set dark text color */
+}
+
+.text-muted {
+    color: #6c757d !important; /* Set muted text color */
+}
+
+.text-danger {
+    color: #dc3545 !important; /* Set danger text color */
+}
+
+.no-underline {
+    text-decoration: none !important; /* Remove underline */
+    color: #333 !important; /* Set link color */
+}
+
+.row {
+    display: flex !important; /* Set row display to flex */
+    flex-wrap: wrap !important; /* Wrap content */
+    margin-right: -15px !important; /* Set margin right */
+    margin-left: -15px !important; /* Set margin left */
+}
+
+.col,
+.col-4 {
+    position: relative !important; /* Set column position relative */
+    width: 100% !important; /* Set column width */
+    min-height: 1px !important; /* Set column min height */
+    padding-right: 15px !important; /* Set padding right */
+    padding-left: 15px !important; /* Set padding left */
+}
+
+.card-body {
+    flex: 1 1 auto !important; /* Set card body flex */
+    min-height: 1px !important; /* Set card body min height */
+    padding: 1.25rem !important; /* Set padding */
+}
+
+.form-group {
+    margin-bottom: 1rem !important; /* Set form group margin bottom */
+}
+
+.btn-info {
+    color: #fff !important; /* Set button info color */
+    background-color: #37d189 !important; /* Set button info background color */
+    border-color: #37d189 !important; /* Set button info border color */
+}
+
+.btn-info:hover {
+    background-color: #2eab7a !important; /* Set button info hover background color */
+    border-color: #2eab7a !important; /* Set button info hover border color */
+}
+
+.btn-primary {
+    color: #fff !important; /* Set button primary color */
+    background-color: #007bff !important; /* Set button primary background color */
+    border-color: #007bff !important; /* Set button primary border color */
+}
+
+.btn-primary:hover {
+    background-color: #0069d9 !important; /* Set button primary hover background color */
+    border-color: #0062cc !important; /* Set button primary hover border color */
+}
+
+.btn-secondary {
+    color: #fff !important; /* Set button secondary color */
+    background-color: #6c757d !important; /* Set button secondary background color */
+    border-color: #6c757d !important; /* Set button secondary border color */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268 !important; /* Set button secondary hover background color */
+    border-color: #545b62 !important; /* Set button secondary hover border color */
+}
+
+.card {
+    margin-top: 20px; /* Set card margin top */
+    margin-bottom: 20px; /* Set card margin bottom */
+}
+
+.card-body {
+    padding: 20px; /* Set card body padding */
+}
+
+.btn {
+    margin-top: 10px; /* Set button margin top */
+}
+
+.text-dark {
+    color: #333 !important; /* Set text dark color */
+}
+
+.text-muted {
+    color: #555 !important; /* Set text muted color */
+}
+
+.text-center {
+    text-align: center !important; /* Set text center alignment */
+}
+
+.no-underline {
+    text-decoration: none !important; /* Remove underline from links */
+    color: #333 !important; /* Set link color */
+}
+
+.mt-5 {
+    margin-top: 5rem !important; /* Set margin top */
+}
+
+.col {
+    flex: 1; /* Set column flex */
+}
+
+.col-4 {
+    flex: 4; /* Set column flex */
+}
+
+.row {
+    display: flex; /* Set row display to flex */
+    justify-content: space-between; /* Justify content between */
+    align-items: center; /* Align items center */
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Set form group margin bottom */
+}
+
+.container-fluid {
+    width: 100%; /* Set container fluid width */
+    padding-right: 15px; /* Set padding right */
+    padding-left: 15px; /* Set padding left */
+    margin-right: auto; /* Set margin right auto */
+    margin-left: auto; /* Set margin left auto */
+}
+
+.card {
+    position: relative; /* Set card position relative */
+    display: flex; /* Set card display to flex */
+    flex-direction: column; /* Set card flex direction to column */
+    min-width: 0; /* Set min width */
+    word-wrap: break-word; /* Word wrap break word */
+    background-color: #fff; /* Set background color */
+    background-clip: border-box; /* Set background clip */
+    border: 1px solid rgba(0, 0, 0, 0.125); /* Set border */
+    border-radius: 0.25rem; /* Set border radius */
+}
+
+.shadow {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); /* Set shadow */
+}
+
+.text-center {
+    text-align: center; /* Set text center alignment */
+}
+
+.btn-warning {
+    background-color: #f0ad4e !important; /* Set button warning background color */
+    border-color: #eea236 !important; /* Set button warning border color */
+}
+
+.btn-warning:hover {
+    background-color: #ec971f !important; /* Set button warning hover background color */
+    border-color: #d58512 !important; /* Set button warning hover border color */
+}
+
+.shadow {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important; /* Set shadow */
+}
+
+.text-dark {
+    color: #212529 !important; /* Set text dark color */
+}
+
+.text-muted {
+    color: #6c757d !important; /* Set text muted color */
+}
+
+.text-danger {
+    color: #dc3545 !important; /* Set text danger color */
+}
+
+.no-underline {
+    text-decoration: none !important; /* Remove underline */
+    color: #333 !important; /* Set link color */
+}
+
+.row {
+    display: flex !important; /* Set row display to flex */
+    flex-wrap: wrap !important; /* Wrap content */
+    margin-right: -15px !important; /* Set margin right */
+    margin-left: -15px !important; /* Set margin left */
+}
+
+.col,
+.col-4 {
+    position: relative !important; /* Set column position relative */
+    width: 100% !important; /* Set column width */
+    min-height: 1px !important; /* Set column min height */
+    padding-right: 15px !important; /* Set padding right */
+    padding-left: 15px !important; /* Set padding left */
+}
+
+.card-body {
+    flex: 1 1 auto !important; /* Set card body flex */
+    min-height: 1px !important; /* Set card body min height */
+    padding: 1.25rem !important; /* Set padding */
+}
+
+.form-group {
+    margin-bottom: 1rem !important; /* Set form group margin bottom */
+}
+
+.btn-info {
+    color: #fff !important; /* Set button info color */
+    background-color: #37d189 !important; /* Set button info background color */
+    border-color: #37d189 !important; /* Set button info border color */
+}
+
+.btn-info:hover {
+    background-color: #2eab7a !important; /* Set button info hover background color */
+    border-color: #2eab7a !important; /* Set button info hover border color */
+}
+
+.btn-primary {
+    color: #fff !important; /* Set button primary color */
+    background-color: #007bff !important; /* Set button primary background color */
+    border-color: #007bff !important; /* Set button primary border color */
+}
+
+.btn-primary:hover {
+    background-color: #0069d9 !important; /* Set button primary hover background color */
+    border-color: #0062cc !important; /* Set button primary hover border color */
+}
+
+.btn-secondary {
+    color: #fff !important; /* Set button secondary color */
+    background-color: #6c757d !important; /* Set button secondary background color */
+    border-color: #6c757d !important; /* Set button secondary border color */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268 !important; /* Set button secondary hover background color */
+    border-color: #545b62 !important; /* Set button secondary hover border color */
+}
+
+.card {
+    margin-top: 20px; /* Set card margin top */
+    margin-bottom: 20px; /* Set card margin bottom */
+}
+
+.card-body {
+    padding: 20px; /* Set card body padding */
+}
+
+.btn {
+    margin-top: 10px; /* Set button margin top */
+}
+
+.text-dark {
+    color: #333 !important; /* Set text dark color */
+}
+
+.text-muted {
+    color: #555 !important; /* Set text muted color */
+}
+
+.text-center {
+    text-align: center !important; /* Set text center alignment */
+}
+
+.no-underline {
+    text-decoration: none !important; /* Remove underline from links */
+    color: #333 !important; /* Set link color */
+}
+
+.mt-5 {
+    margin-top: 5rem !important; /* Set margin top */
+}
+
+.col {
+    flex: 1; /* Set column flex */
+}
+
+.col-4 {
+    flex: 4; /* Set column flex */
+}
+
+.row {
+    display: flex; /* Set row display to flex */
+    justify-content: space-between; /* Justify content between */
+    align-items: center; /* Align items center */
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Set form group margin bottom */
+}
+
+.container-fluid {
+    width: 100%; /* Set container fluid width */
+    padding-right: 15px; /* Set padding right */
+    padding-left: 15px; /* Set padding left */
+    margin-right: auto; /* Set margin right auto */
+    margin-left: auto; /* Set margin left auto */
+}
+
